@@ -12,10 +12,26 @@ inputs:
 outputs:
   plan:
     description: 'cdktf diff output'
+    value: ${{ steps.plan.outputs.plan-out }}
+  deploy:
+    description: 'cdktf deploy output'
+    value: ${{ steps.deploy.outputs.deploy-out }}
 
 runs:
-  using: docker
-  image: Dockerfile
-  env:
-    WORKDIR: ${{ inputs.workdir }}
-    ACTION: ${{ inputs.action }}
+  using: composite
+  steps:
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+    - name: Run plan
+      if: ${{ inputs.action == 'plan' }}
+      id: plan
+      run: plan.sh ${{ inputs.workdir }}
+      shell: bash
+    - name: deploy
+      if: ${{ inputs.action == 'deploy' }}
+      id: deploy
+      run: deploy.sh ${{ inputs.workdir }}
+      shell: bash
