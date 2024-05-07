@@ -12,6 +12,5 @@
     "ghcr.io/devcontainers-contrib/features/tfsec:1": {},
     "ghcr.io/devcontainers-contrib/features/terraform-docs:1": {},
     "ghcr.io/devcontainers-contrib/features/tfcdk-cli:1": {}
-  },
-  "postStartCommand": "pipenv install"
+  }
 }
