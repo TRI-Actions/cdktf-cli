@@ -1,13 +1,13 @@
 FROM node:20-alpine AS node
 
-FROM alpine:latest
+FROM python:3.12-alpine
 
 ENV PYTHONUNBUFFERED=1
 ENV PIP_BREAK_SYSTEM_PACKAGES 1
 WORKDIR /usr/src
 
 ARG PRODUCT=terraform
-ARG VERSION=1.8.0
+ARG VERSION=1.8.2
 
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
@@ -18,8 +18,7 @@ COPY ./entrypoint.sh .
 
 RUN chmod +x /usr/src/entrypoint.sh
 
-RUN apk add --update --no-cache gnupg npm wget bash openssl ncurses-libs libstdc++ python3 py3-pip && \
-  ln -sf python3 /usr/bin/python && \
+RUN apk add --update --no-cache gnupg npm wget bash openssl ncurses-libs libstdc++ && \
   cd /tmp && \
   wget https://releases.hashicorp.com/${PRODUCT}/${VERSION}/${PRODUCT}_${VERSION}_linux_amd64.zip && \
   wget https://releases.hashicorp.com/${PRODUCT}/${VERSION}/${PRODUCT}_${VERSION}_SHA256SUMS && \
