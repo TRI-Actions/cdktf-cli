@@ -31,7 +31,7 @@ RUN apk add --update --no-cache gnupg npm wget bash openssl ncurses-libs libstdc
   mv /tmp/${PRODUCT} /usr/local/bin/${PRODUCT} && \
   rm -f /tmp/${PRODUCT}_${VERSION}_linux_amd64.zip ${PRODUCT}_${VERSION}_SHA256SUMS ${VERSION}/${PRODUCT}_${VERSION}_SHA256SUMS.sig
 
-RUN pip3 install --no-cache --upgrade pip setuptools
+RUN pip3 install --no-cache --upgrade pip setuptools pipenv
 RUN npm install -g npm@latest && npm install -g cdktf-cli@latest
 
 ENTRYPOINT ["/usr/src/entrypoint.sh"]
