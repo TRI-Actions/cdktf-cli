@@ -1,0 +1,21 @@
+name: 'cdktf-cli'
+description: 'Custom action to provide access to CDKTF cli'
+inputs:
+  action:
+    description: 'cdktf action to run'
+    required: true
+  workdir:
+    description: 'workdir path to run cdktf in'
+    required: true
+    default: '.'
+
+outputs:
+  plan:
+    description: 'cdktf diff output'
+
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    WORKDIR: ${{ inputs.workdir }}
+    ACTION: ${{ inputs.action }}
