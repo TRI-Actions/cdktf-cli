@@ -10,12 +10,9 @@ inputs:
     default: '.'
 
 outputs:
-  plan:
-    description: 'cdktf diff output'
-    value: ${{ steps.plan.outputs.plan-out }}
-  deploy:
-    description: 'cdktf deploy output'
-    value: ${{ steps.deploy.outputs.deploy-out }}
+  drift:
+    description: 'drift status'
+    value: ${{ steps.plan.outputs.drift-status }}
 
 runs:
   using: composite
