@@ -1,9 +1,10 @@
 #!/bin/bash
+export CI=1
 echo Installing dependencies
 pipenv install
 cd $1
 echo Running plan in for $1
-cdktf diff --refresh-only --no-color > plan.out
+cdktf diff > plan.out
 
 INDEX=$(awk '/Note: Objects have changed/{ print NR; exit }' plan.out)
 
