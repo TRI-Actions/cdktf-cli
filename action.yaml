@@ -31,7 +31,6 @@ runs:
         WORKDIR: ${{ inputs.workdir }}
     - name: deploy
       if: ${{ inputs.action == 'deploy' }}
-      id: deploy
       run: deploy.sh
       shell: bash
       env:
