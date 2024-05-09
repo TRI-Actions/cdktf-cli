@@ -25,10 +25,14 @@ runs:
     - name: Run plan
       if: ${{ inputs.action == 'plan' }}
       id: plan
-      run: plan.sh ${{ inputs.workdir }}
+      run: plan.sh
       shell: bash
+      env:
+        WORKDIR: ${{ inputs.workdir }}
     - name: deploy
       if: ${{ inputs.action == 'deploy' }}
       id: deploy
-      run: deploy.sh ${{ inputs.workdir }}
+      run: deploy.sh
       shell: bash
+      env:
+        WORKDIR: ${{ inputs.workdir }}

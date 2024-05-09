@@ -1,7 +1,7 @@
 #!/bin/bash
 export CI=1
-cd $INPUT_WORKDIR
-echo Running plan for $INPUT_WORKDIR
+cd $WORKDIR
+echo Running plan for $WORKDIR
 cdktf diff --refresh-only --no-color > plan.out
 
 INDEX=$(awk '/Note: Objects have changed/{ print NR; exit }' plan.out)
