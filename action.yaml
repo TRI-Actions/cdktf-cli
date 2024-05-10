@@ -10,7 +10,7 @@ inputs:
     default: '.'
 
 outputs:
-  drift:
+  drift-status:
     description: 'drift status'
     value: ${{ steps.plan.outputs.drift-status }}
 
