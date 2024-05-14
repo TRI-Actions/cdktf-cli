@@ -4,7 +4,7 @@ inputs:
   action:
     description: 'cdktf action to run'
     required: true
-  workdir:
+  workdirs:
     description: 'workdir path to run cdktf in'
     required: true
     default: '.'
@@ -28,10 +28,16 @@ runs:
       run: plan.sh
       shell: bash
       env:
-        WORKDIR: ${{ inputs.workdir }}
+        WORKDIRS: ${{ inputs.workdirs }}
     - name: deploy
       if: ${{ inputs.action == 'deploy' }}
       run: deploy.sh
       shell: bash
       env:
-        WORKDIR: ${{ inputs.workdir }}
+        WORKDIRS: ${{ inputs.workdirs }}
+    - name: destroy
+      if: ${{ inputs.action == 'destroy' }}
+      run: destroy.sh
+      shell: bash
+      env:
+        WORKDIRS: ${{ inputs.workdirs }}
