@@ -9,11 +9,6 @@ inputs:
     required: true
     default: '.'
 
-outputs:
-  drift-status:
-    description: 'drift status'
-    value: ${{ steps.plan.outputs.drift-status }}
-
 runs:
   using: composite
   steps:

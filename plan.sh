@@ -11,10 +11,10 @@ for i in $WORKDIRS; do
   if [[ $INDEX ]]; then
     echo Drift Detected!
     sed -i "1,$((INDEX-1)) d" plan.out
-    echo "drift-status=DRIFTED" >> $GITHUB_OUTPUT
+    echo "DRIFTED" > drift.out
   else
     echo No drift detected!
-    echo "drift-status=IN-SYNC" >> $GITHUB_OUTPUT
+    echo "IN-SYNC" > drift.out
     cdktf diff --no-color > plan.out
   fi
   cd ..
