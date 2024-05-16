@@ -6,8 +6,10 @@ inputs:
     required: true
   workdirs:
     description: 'workdir path to run cdktf in'
-    required: true
     default: '.'
+  update_state:
+    description: whether we update the state or not
+    default: 'false'
 
 runs:
   using: composite
@@ -30,6 +32,7 @@ runs:
       shell: bash
       env:
         WORKDIRS: ${{ inputs.workdirs }}
+        UPDATE_STATE: ${{ inputs.update_state }}
     - name: destroy
       if: ${{ inputs.action == 'destroy' }}
       run: destroy.sh

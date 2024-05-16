@@ -3,12 +3,17 @@ export CI=1
 
 for i in $WORKDIRS; do
   cd $i
+  if [ ! -d $i ]; then
+    echo $i is not a directory, skipping..
+    continue
+  fi
   echo Running plan for $i
-  cdktf diff --refresh-only --no-color > plan.out
+
+  cdktf diff $options > plan.out
 
   INDEX=$(awk '/Note: Objects have changed/{ print NR; exit }' plan.out)
 
-  if [[ $INDEX ]]; then
+  if [[ -n "$INDEX" ]]; then
     echo Drift Detected!
     sed -i "1,$((INDEX-1)) d" plan.out
     echo "DRIFTED" > drift.out
@@ -17,7 +22,9 @@ for i in $WORKDIRS; do
     echo "IN-SYNC" > drift.out
     cdktf diff --no-color > plan.out
   fi
-  cd ..
+  if [ ! $i == '.' ]; then
+    cd ..
+  fi
 done
 
 echo Done!
