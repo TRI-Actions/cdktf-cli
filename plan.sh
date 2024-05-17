@@ -32,7 +32,7 @@ for i in $WORKDIRS; do
     echo $i is not a directory, skipping..
     continue
   fi
-  plan $i &
+  plan $i
 done
 
 wait
