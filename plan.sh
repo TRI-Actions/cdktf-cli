@@ -3,7 +3,7 @@ export CI=1
 
 plan() {
   dir=$1
-  cd dir
+  cd $dir
   echo Running plan for $dir
   options=" --no-color"
   if [ "$DRIFT_CHECK" == "true" ]; then
@@ -37,5 +37,4 @@ done
 
 wait
 echo Done!
-
-exit
+exit 0
