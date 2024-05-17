@@ -8,6 +8,10 @@ for i in $WORKDIRS; do
   fi
   cd $i
   echo Running plan for $i
+  options=" --refresh-only --no-color"
+  # if [ "$UPDATE_STATE" != "true" ]; then
+  #   options+=" --refresh-only"
+  # fi
 
   cdktf diff $options > plan.out
 
