@@ -6,7 +6,7 @@ plan() {
   cd dir
   echo Running plan for $dir
   options=" --no-color"
-  if [ "$DRIFT_CHECK" != "true" ]; then
+  if [ "$DRIFT_CHECK" == "true" ]; then
     options+=" --refresh-only"
 
     cdktf diff $options > plan.out
