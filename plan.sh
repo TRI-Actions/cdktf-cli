@@ -2,11 +2,11 @@
 export CI=1
 
 for i in $WORKDIRS; do
-  cd $i
   if [ ! -d $i ]; then
     echo $i is not a directory, skipping..
     continue
   fi
+  cd $i
   echo Running plan for $i
 
   cdktf diff $options > plan.out
