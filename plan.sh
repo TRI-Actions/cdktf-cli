@@ -25,7 +25,7 @@ plan() {
   else
     cdktf diff $options > plan.out
     INDEX=$(awk '/Terraform used the selected providers/{ print NR; exit }' plan.out)
-    sed -i "1,$((INDEX)) d" plan.out
+    sed -i "1,$((INDEX-1)) d" plan.out
     echo "IN-SYNC" > drift.out
   fi
   cd ..
