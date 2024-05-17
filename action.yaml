@@ -7,6 +7,9 @@ inputs:
   workdirs:
     description: 'workdir path to run cdktf in'
     default: '.'
+  drift_check:
+    description: 'whether to run drift check or not'
+    default: 'false'
   update_state:
     description: whether we update the state or not
     default: 'false'
@@ -26,6 +29,7 @@ runs:
       shell: bash
       env:
         WORKDIRS: ${{ inputs.workdirs }}
+        DRIFT_CHECK: ${{ inputs.drift_check }}
     - name: deploy
       if: ${{ inputs.action == 'deploy' }}
       run: deploy.sh
