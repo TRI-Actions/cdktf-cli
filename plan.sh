@@ -25,6 +25,7 @@ plan() {
   else
     cdktf diff $options > plan.out
   fi
+  cd ..
 }
 
 for i in $WORKDIRS; do
