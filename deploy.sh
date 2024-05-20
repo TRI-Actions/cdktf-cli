@@ -8,7 +8,7 @@ for i in $WORKDIRS; do
   fi
 
   options="--auto-approve --no-color"
-  if [ "$UPDATE_STATE" != "true" ]; then
+  if [ "$UPDATE_STATE" == "true" ]; then
     options+=" --refresh-only"
   fi
 

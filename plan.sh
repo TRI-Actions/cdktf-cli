@@ -28,7 +28,9 @@ plan() {
     sed -i "1,$((INDEX-1)) d" plan.out
     echo "IN-SYNC" > drift.out
   fi
-  cd ..
+  if [ ! $i == '.' ]; then
+    cd ..
+  fi
 }
 
 for i in $WORKDIRS; do
